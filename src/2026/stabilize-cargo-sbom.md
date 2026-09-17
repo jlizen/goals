@@ -8,6 +8,7 @@
 | Other tracking issues | [rust-lang/cargo#16565]                         |
 | Zulip channel         | N/A                                             |
 | [cargo] champion      | @weihanglo                                      |
+| Funding contact       | @Shnatsel |
 
 
 ## Summary
@@ -42,11 +43,11 @@ Inaccurate SBOMs lead to false positives on vulnerability scans and/or complianc
 
 | Task        | Owner(s) | Notes |
 | ----------- | -------- | ----- |
-| Complete the RFC | @Shnatsel et al. |    |
-| Resolve known issues | @Shnatsel et al. |       |
+| Complete the RFC | @Shnatsel | @weihanglo can review and discuss blockers with [cargo] |
+| Resolve known issues | @Shnatsel | @weihanglo can review PRs and may help with issues that would benefit from maintainer attention |
 | Convert cargo-cyclonedx to use the SBOM precursor | @Shnatsel et al. | outside the Rust Project repositories, no Rust Project mentorship needed |
-| Resolve newly uncovered issues | @Shnatsel et al. |       |
-| Stabilize the MVP | @Shnatsel et al. |       |
+| Resolve newly uncovered issues | @Shnatsel |       |
+| Stabilize the MVP | @Shnatsel |       |
 
 I am in the process of applying for funding for this work, together with collaborators I'm not sure I can disclose. The amount of time we can dedicate to the project will depend on the outcome of that application. It is possible that the funding will only materialize in the second half of the year or not at all.
 
@@ -69,6 +70,12 @@ We will need:
 | Test Cargo's SBOM precursor | TBD | TBD |
 | Resolve issues in the SBOM precursor | TBD | TBD |
 | Convert cargo-cyclonedx to use the SBOM precursor | TBD | TBD |
+
+## Funding
+
+| Purpose | Cost | Funded | Sponsor(s) |
+|---------|------|--------|------------|
+| Contributor (3 months, part-time) | $40,000 | No | |
 
 ## Frequently asked questions
 
