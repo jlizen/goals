@@ -4,7 +4,7 @@
 | :-------------- | ----------------------------- |
 | Contact         | @nnethercote                  |
 | Funding contact | [Hexcat](https://hexcat.nl/)  |
-| Status          | Proposed                      |
+| Status          | Accepted                      |
 | Roadmap         | Fast Builds                   |
 | Timespan        | 2026-2027                     |
 
