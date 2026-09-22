@@ -5,7 +5,6 @@
 | :--                 | :--                                |
 | Contact         | @jlizen                     |
 | Status          | Proposed                                     |
-| Tracking issue  | TODO(link)                                   |
 | Zulip channel   | TODO(link)        |
 | [crates.io] champion     | ??                       |
 | [cargo] champion | ??                           |
