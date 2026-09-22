@@ -44,7 +44,7 @@ I expect that we will soon set a default min-publish-age for cargo. This will be
 Most reasonable default cooldowns would be longer than 86 minutes, meaning the arrayref attack would have much more limited impact. 
 However, this still produces a "firedrill" for security responders where our release process fails open in case of a 
 delayed response. This is a concerning operational posture given that we expect the supply chain attacks to grow both 
-more frequent and more sophisticated. It also relies on client-side configuration that does not extend to other build tools.
+more frequent and more sophisticated. It also relies on client-side configuration that does not extend to other build tools, or tools that override the default cargo configuration.
 
 ### What we propose to do about it
 
