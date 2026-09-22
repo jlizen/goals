@@ -66,7 +66,7 @@ across the project with an emphasis on avoiding toil for maintainers and consume
 
 ## Team asks
 
-jlizen@ plans to do most of the implementation work for this across all relevant systems, possibly delegating some to
+@jlizen plans to do most of the implementation work for this across all relevant systems, possibly delegating some to
 contractors or Rust Foundation teammates. The team asks are for feedback on approach and reviews.
 
 | Team | Support level | Notes |
