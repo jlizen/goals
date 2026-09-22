@@ -83,29 +83,34 @@ without external build tool changes, but they could make UX improvements if they
 
 ## Frequently asked questions
 
-**What's the point of holding already-released malware?**
+### What's the point of holding already-released malware?
+
 Users continuously install software in CI and otherwise. Even if a version has been released, there is benefit in
 holding it to prevent subsequent installs. Lowering the threshold for taking admin action via a softer mitigation will
 allow faster responses. Even better, we're working towards holding software before it is even released in the first place. 
 
-**Does this add work for maintainers?**
+### Does this add work for maintainers?
+
 For RFC 1 and RFC 2, this is strictly a softening of the current mitigation available (ie, delete). It's also a quality
 of life improvement for incident responders via bulk actions. For RFC 3 (automatic scan / hold + manual review queue),
 there is a potential for maintainer impact. The RFC will go more in depth around the risks and controls for this. In
 general, the guiding principle will be, run in shadow mode for a while, make sure we have acceptable false-positive rates, and only then promote a detection to acting. This protects both maintainers from toil, and the crates.io and security teams reviewing the queue from overload. Similarly we will need to specify a SLA, an appeal mechanism,
 and other nuts and bolts.
 
-**Who decides what gets held? What is the trust model?**
+### Who decides what gets held? What is the trust model?
+
 This concern should be decided at the registry level. For RFCs 1 and 2 (the manual hold), we can use the existing
 criteria that we use for admin deletion. We also can reuse the [existing malicious crate channels](https://blog.rust-lang.org/2026/02/13/crates.io-malicious-crate-update/) (along with new tombstones in the index files).
 
 For RFC 3 (the automatic hold), we need to hash this out still. I imagine starting narrow, with deterministic checks,
 and shadow mode to judge impact, will be a good place to start.
 
-**Why three RFCs?**
+### Why three RFCs?
+
 We'd prefer each individual RFC to be relatively small to keep it manageable to review and find consensus. Specifically,
 we are designing the registry and cargo behaviors (RFC 1), separately from the actual distributed systems work that crates.io will implement on top of it (RFC 2). We expect RFC 3 to be much more complex to find consensus on so would preserve to build the foundation for it separately.
 
-**What are we leaving out?**
+### What are we leaving out?
+
 The biggest thing is revocation of already-cached copies of crates. That is worth doing, but as a separate effort. We
 also erred on the side of simple UX in a few other places. Details are in the RFCs.
