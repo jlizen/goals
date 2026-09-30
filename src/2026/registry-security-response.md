@@ -1,4 +1,4 @@
-# Project Goal: Registry security response: hold, withdraw, publish-time checks
+# Registry security response: hold, withdraw, publish-time checks
 
 
 | Metadata            |                                    |
