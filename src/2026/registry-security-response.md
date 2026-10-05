@@ -1,15 +1,15 @@
 # Registry security response: hold, withdraw, publish-time checks
 
 
-| Metadata            |                                    |
-| :--                 | :--                                |
-| Contact         | @jlizen                     |
-| Status          | Proposed                                     |
-| Zulip channel   | TODO(link)        |
-| [crates-io] champion     | ??                       |
-| [cargo] champion | ??                           |
-| [infra] champion | ??                           |
-| [docs.rs] champion | ??                           |
+| Metadata             |                                    |
+| :--                  | :--                                |
+| Contact              | @jlizen                            |
+| Status               | Proposed                           |
+| Zulip channel        | N/A                                |
+| [crates-io] champion | ??                                 |
+| [cargo] champion     | ??                                 |
+| [infra] champion     | ??                                 |
+| [docs.rs] champion   | ??                                 |
 
 ## Summary
 
