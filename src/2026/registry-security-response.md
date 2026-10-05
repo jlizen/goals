@@ -9,7 +9,7 @@
 | [crates-io] champion | ??                                 |
 | [cargo] champion     | ??                                 |
 | [infra] champion     | ??                                 |
-| [docs.rs] champion   | ??                                 |
+| [docs-rs] champion   | ??                                 |
 
 ## Summary
 
