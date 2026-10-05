@@ -9,7 +9,7 @@
 | [crates-io] champion | ??                                 |
 | [cargo] champion     | ??                                 |
 | [infra] champion     | ??                                 |
-| [docs-rs] champion   | ??                                 |
+| [docs.rs] champion   | ??                                 |
 
 ## Summary
 
@@ -34,7 +34,7 @@ crates.io today has three states:
 - deleted (bytes inaccessible, redacted from registry index, admin notifications are manual)
 
 This makes life difficult from an incident response point of view. In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
-
+ 
 Meanwhile, we recently saw a [successful supply chain attack on the arrayref crate](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/), which is present in ~75% of Rust environments and has ~250 million downloads. 
 Among other attack elements, a malicious, namesquatting crate was published to crates.io, and then a compromised 
 credential cut `arrayref` over to depending on it. There are a number of deterministic signals here that are clearly suspicious: a popular crate adding a new build dependency, a popular crate taking a dependency on a typosquat, a crate bearing base64 encoded URLs in its build script and other obvious malware signs, and so on.
@@ -138,4 +138,4 @@ of the box since it can invalidate stale merkle subtrees (ie index file caches).
 
 | Purpose | Cost | Funded | Sponsor(s) |
 |---------|------|--------|------------|
-| Reviews + design consults | $10,000 | No | |
+| Reviews + design support + champion cycles | $10,000 | No | |
