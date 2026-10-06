@@ -15,7 +15,7 @@
 
 We want an auditable way for crates.io administrators to **hold** (reversibly "freeze" releases for investigation, 
 preventing normal fetching of bytes) and **withdraw** (remove release bytes, leaving behind a tombstone). This is necessary to 
-allow a reversible way to quickly "freeze" a situation during a security investigation. It also lets us set up
+quickly and temporarily "freeze" a situation during a security investigation. It also lets us set up
 auditable mechanisms to automatically hold supply chain attacks before they are released to the mirror.
 
 We will use this capability in two ways:
