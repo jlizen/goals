@@ -6,67 +6,102 @@
 | Contact              | @jlizen                            |
 | Status               | Proposed                           |
 | Zulip channel        | N/A                                |
-| [crates-io] champion | ??                                 |
-| [cargo] champion     | ??                                 |
+| [crates-io] champion | @Turbo87                           |
+| [cargo] champion     | @eh2406                            |
 | [infra] champion     | ??                                 |
 | [docs-rs] champion   | ??                                 |
 
 ## Summary
 
-We want an auditable way for crates.io administrators to **hold** (reversibly "freeze" releases for investigation, 
-preventing normal fetching of bytes) and **withdraw** (remove release bytes, leaving behind a tombstone). This is necessary to 
-quickly and temporarily "freeze" a situation during a security investigation. It also lets us set up
-auditable mechanisms to automatically hold supply chain attacks before they are released to the mirror.
+Registry administrators see supply chain attacks increasing in both in volume and sophistication.
+We need to make sure we have the right security primitives to respond to new threats,
+and that we have the confidence to use them when uncertain. We also need to raise the floor
+of our front-line defenses so that our operators can focus on the most subtle attacks.
 
-We will use this capability in two ways:
-1. manual admin action, via API or console, similar to current "admin delete" workflows
-2. automated publish-time checks that, upon serious suspicious signals, place releases on hold and into a "manual review" queue
+Today, we have a tight crates.io security response team, that reacts quickly, but our
+mitigations are mostly manual and frequently destructive to the point of delaying response.
+From recent attacks, we see tools that are missing from our toolkit which we want for the future.
 
-Our focus here is on building security primitives, with some simple detections wired up. Further detections and more sophisticated usage of these primitives will require separate Project Goals and/or RFCs.
+An illustrative example: 
+```quote
+In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
+```
+
+This goal builds some of those tools, in three phases:
+1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
+2. Gather shadow-mode data on supply chain detection systems to validate strategies
+3. Build systems that detect likely attacks prior to publish and freeze them for human reviews
 
 ## Motivation
 
 ### The status quo
 
-crates.io today has three states:
-- fully public
-- public but "yanked" (Flagged as yanked in the index, but still distributed and live on the crates.io CDN, thus installable via Cargo.lock coordinates, but don't resolve as valid crates otherwise)
-- deleted (bytes inaccessible, redacted from registry index, admin notifications are manual)
+#### The big picture
 
-This makes life difficult from an incident response point of view. In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
- 
-Meanwhile, we recently saw a [successful supply chain attack on the arrayref crate](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/), which is present in ~75% of Rust environments and has ~250 million downloads. 
-Among other attack elements, a malicious, namesquatting crate was published to crates.io, and then a compromised 
-credential cut `arrayref` over to depending on it. There are a number of deterministic signals here that are clearly suspicious: a popular crate adding a new build dependency, a popular crate taking a dependency on a typosquat, a crate bearing base64 encoded URLs in its build script and other obvious malware signs, and so on.
+Most language ecosystems have recently experienced supply chain attacks that compromised significat infrastructure.
+Attacks are evolving in sophistication to include two stage attack payloads, hiding primary attacks underneath
+poisoned dependencies, and manipulation of the resolver to increase delivery ([arrayref August 2026](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/)).
+We also see new attacks such as targeting high-impact individuals [via spearphishing](https://blog.rust-lang.org/2026/09/17/targeted-attacks/).
+Other projects see similar attacks ([such as Django in October 2026](https://frankwiles.com/posts/i-got-targeted/)).
 
-In fact, for the `arrayref` incident, several Rust Foundation security systems did in fact trigger (for instance, the namesquatting detection). But, no automated action is taken by default, and signal quality is not high enough to page ourselves on those signals that we did detect (but it would have been serious enough for an automated system to temporarily freeze the crate). Instead, we manually pulled the malicious crate 86 minutes after publication, in response to an external vulnerability report from a security researcher.
+Our current security responses are fairly tight, and we have largely avoided broad impact.
+(`arrayref` was the worst attack we know of to date, and it was live for ~90 minutes with little evidence of further 
+spread via compromised environments). 
 
-We [recently stabilized min-publish-age in cargo](https://github.com/rust-lang/cargo/pull/17335), which allows setting a "cooldown" to give time for security reports and admin action before clients uptake malicious releases.
-I expect that we will soon set a default min-publish-age for cargo. This will be useful and complementary change. 
-Most reasonable default cooldowns would be longer than 86 minutes, meaning the arrayref attack would have much more limited impact. 
+#### Our current tools
 
-However, this still produces a "firedrill" for security responders where our release process fails open in case of a 
-delayed response. This is a concerning operational posture given that we expect the supply chain attacks to grow both (for instance the recent [spearphishing attacks targeting RustLang members](https://blog.rust-lang.org/2026/09/17/targeted-attacks/)). It also relies on client-side configuration that does not extend to other build tools (example: Yocto), or tools that override the default cargo configuration.
+We have quite a few detection systems built already, running offline. In fact, for the `arrayref` incident, several Rust 
+Foundation security systems did in fact trigger (for instance, the namesquatting detection). They largely operate based
+on scheduled jobs. Some fire notifications, but many false-positive-prone and reviewed manually.
+
+We are also building client-side hardening via `min-publish-age`. It adds Cargo-side cooldowns for extra scrutiny.
+This could become set by default and relieve some of the urgency of security responses, at least for some swathe of our
+consumers. Though, it still leaves registry administrators in a poisition of, "press this button in time or else there is an
+incident", which is still a psychologically stressful operator role.
+
+For operator responses, crates.io and other registries have three lifecycle states:
+- public and available
+- public but "yanked" (Flagged as yanked in the index, but still distributed and live on the crates.io CDN. Installable,
+but Cargo and some build tools will avoid resolving yanked cordinates. Reversible.)
+- deleted (Bytes inaccessible, redacted from registry index, admin notifications are manual. Semi-reversible but partially destructive.)
+
+A gap in our existing mitigation (deletion) is that malicious bytes persisent in local Cargo caches after install.
+This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring] work will address this gap without action by this goal, because it includes cheap verification of freshness of
+index data (via merkle subtree anlysis).
+
+#### Peer approaches
+
+One thing that we are missing, that our peers in PyPI have built, is [a quarantine state](https://blog.pypi.org/posts/2024-12-30-quarantine/)
+that explicitly *freezes* bytes and stops serving them, even if they are in lockfiles. This is the primitive we were missing
+in the Summary's quoted incident.
+
+PyPI maintainers are also [discussing automated detection + hold systems](https://github.com/python/peps/pull/5070). 
+[npm has similar systems](https://github.com/orgs/community/discussions/203413), though has faced criticism on maintainer 
+impact via its current implementation.
+
+Maven Central has similar systems downstream of the registry via a paid product, [Firewall](https://help.sonatype.com/en/firewall-quarantine.html).
+
 
 ### What we propose to do about it
 
-We expect four phases of work. Each will have a design discussion via RFC or team issue, followed by implementation.
+We expect three phases of work. Each will have a design discussion via RFC or team issue, followed by implementation.
 
-- [RFC 1](https://github.com/jlizen/rfcs/pull/1): **A registry quarantined/withdrawn state, matching Cargo behavior**: We can
-start by adding Cargo/registry spec support for administrative quarantines and withdrawals. This lets us model
-unreachable bytes at the build tool level. Any registry can signal that certain releases are quarantined, and optionaly
-serve the withheld bytes for researcher use.
-- crates.io issue/PR: **crates.io support for quarantines and withdrawals** crates.io will need distributed systems
-additions to support quarantined bytes (CDN cache invalidations, etc), and we also will need new APIs to use during
-security incidents. While we are at it, we can add some other nicer bulk admin APIs to reduce the amount of database
-queries and elevated access needed during incidents.
-- RFC 2: **A registry unreleased state, matching Cargo behavior**: Next comes general support for registries flagging
-new releases "unreleased" and thus unavailable. This will involve changes to publish workflows to allow fetching
-unreleased bytes as part of multi-crate release trains. It also will include forensic build support.
-- RFC 3: **crates.io detection systems / automated holds / manual review queue / related governance**: Lastly, we
-want to build the platform that lets us plug supply chain attack systems into crates.io's publish handling, and
-pre-emptively freeze new releases for manual review. This is partly a technical problem, but even more a policy
-and governance question. See "FAQ: Does this add work for maintainers?"
+Support for manual quarantines:
+ - [RFC 1](https://github.com/jlizen/rfcs/pull/1): A registry quarantined/withdrawn state, matching Cargo behavior
+ - Crates.io issue/PR: crates.io support for quarantines and withdrawals
+
+Detection system experiments:
+- Run existing detection systems against the crates.io event feed
+- Build a couple new detection systems aimed at very-high-confidence checks that usually require human review
+- Analyze the results of these experiments, including if they flagged on future supply chain attacks, as well as on
+syntheic attack traffic, and prepare recommendations
+
+Publish-time mitigation systems:
+- RFC 2: A registry unreleased state, matching Cargo behavior. This includes support publishing against unreleased crates
+to avoid breaking release train workflows.
+- RFC 3: crates.io policies and practices to enable mitigation, related governance
+- Crates.io issue/PR: crates.io support for publish-time scan and hold, manual review queue
+
 
 ## Team asks
 
@@ -139,3 +174,4 @@ of the box since it can invalidate stale merkle subtrees (ie index file caches).
 | Purpose | Cost | Funded | Sponsor(s) |
 |---------|------|--------|------------|
 | Reviews + design support + champion cycles | $10,000 | No | |
+
