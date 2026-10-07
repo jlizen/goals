@@ -114,7 +114,7 @@ We expect to have funding to support reviews.
 |------|---------------|-------|
 | [cargo] | Medium | Review and approve RFC 1 (Cargo/registry support for quarantine); review implementation of RFC 1; Review and approve RFC 2 (Unreleased state + Cargo publish support); review implementation of RFC 2 |
 | [crates-io] | Medium | Co-review and approve RFC 1 (Cargo/registry support for quarantine); review and approve PR issue on manual admin APIs, byte management, authorization; review and approve RFC 2 (unreleased state); review and approve RFC 3 (publish-time detection systems); review implementation of RFC 3 |
-| [docs-rs] | Medium | Review and approve RFC 1 and RFC 2 with regard to changes to docs.rs build conditions and release state tracking; review the implementation of RFC 1 and 2|
+| [docs-rs] | Small | Review and approve RFC 1 and RFC 2 with regard to changes to docs.rs build conditions and release state tracking; review the implementation of RFC 1 and 2|
 | [infra] | Small | Advisory consult on crates.io implementation of quarantine APIs and RFC 3 (publish-time scans) |
 
 Beyond Rust Project teams, we will also want to consult with the Rust Foundation, particularly its security team. We
