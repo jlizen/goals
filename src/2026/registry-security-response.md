@@ -166,8 +166,13 @@ the policies around detections that actually apply such holds (RFC 4).
 
 ### What are we leaving out?
 
-The biggest thing is revocation of already-cached copies of crates. Verifiable mirroring will cover a lot of this out
-of the box since it can invalidate stale merkle subtrees (ie index file caches). We also erred on the side of simple UX in a few other places. Details are in the RFCs.
+We aren't trying to build a whole lot of detection systems, or the best detection systems. We mostly want to have
+at least one detection, however thin, that is reliable enough to turn on. It's easy to discuss further systems once we have 
+the base platforms.
+
+We also are not going deep into crowdsourcing reports. Right now, we have a relatively crude process involving email
+intake. One could imagine crowdsourcing flags [like PyPI has discussed](https://blog.pypi.org/posts/2024-12-30-quarantine/#future-improvement-automation),
+for instance via cargo-vet. But, that deserves its own discussion and Project Goal. This one is already fairly large :)
 
 ## Funding
 
