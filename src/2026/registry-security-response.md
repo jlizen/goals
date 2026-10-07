@@ -84,7 +84,7 @@ Maven Central has similar systems downstream of the registry via a paid product,
 
 ### What we propose to do about it
 
-We expect three phases of work. Each will have a design discussion via RFC or team issue, followed by implementation.
+We expect three phases of work. Each will have one or more design discussions via RFC or team repo, followed by implementation.
 
 Support for manual quarantines:
  - [RFC 1](https://github.com/jlizen/rfcs/pull/1): A registry quarantined/withdrawn state, matching Cargo behavior
