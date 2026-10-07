@@ -23,9 +23,7 @@ mitigations are mostly manual and frequently destructive to the point of delayin
 From recent attacks, we see tools that are missing from our toolkit which we want for the future.
 
 An illustrative example: 
-```quote
-In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
-```
+> In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
 
 This goal builds some of those tools, in three phases:
 1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
