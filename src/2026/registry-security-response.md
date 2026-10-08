@@ -226,10 +226,13 @@ new detections, but with publicly agreed-upon criteria for such decisions that i
 ### Why split this up?
 
 We'd prefer each individual RFC to be relatively small to keep it manageable to review and find consensus. Specifically,
-we are designing the quarantine registry spec and Cargo behaviors (RFC 1), separately from the actual distributed systems work that crates.io will implement on top of it (crates.io issue/PR).
+we are designing the quarantine registry spec and Cargo behaviors, separately from the actual distributed systems work that crates.io will implement on top of it (crates.io issue/PR).
 
-And then, we are separating the Cargo/registry spec baseline support for publish-time holds (RFC 3) from
-the policies around detections that actually apply such holds (RFC 4), and the crates.io-side implementation of those
+We build offline testing systems early so we can start baking detection approaches against dryrun data, since we will
+need strong data to bring to the ultimate RFCs to argue for enabling our first couple detection systems.
+
+And then, we are separating the Cargo/registry spec baseline support for publish-time holds from
+the policies around detections that actually apply such holds, and the crates.io-side implementation of those
 policies.
 
 ### What are we leaving out?
@@ -238,7 +241,7 @@ We aren't trying to build a whole lot of detection systems, or the best detectio
 at least one detection, however thin, that is reliable enough to turn on. It's easy to discuss further systems once we have 
 the base platforms.
 
-We also are not going deep into crowdsourcing reports. Right now, we have a relatively crude process involving email
+We also are not going deep into crowdsourcing reports of bad releases. Right now, we have a relatively crude process involving email
 intake. One could imagine crowdsourcing flags [like PyPI has discussed](https://blog.pypi.org/posts/2024-12-30-quarantine/#future-improvement-automation),
 for instance via cargo-vet. But, that deserves its own discussion and Project Goal. This one is already fairly large :)
 
