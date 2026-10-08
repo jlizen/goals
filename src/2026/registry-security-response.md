@@ -54,7 +54,7 @@ on scheduled jobs. Some fire notifications, but many are false-positive-prone, s
 
 We are also building client-side hardening via `min-publish-age`. It adds Cargo-side cooldowns for extra scrutiny.
 This could become set by default and relieve some of the urgency of security responses, at least for some swathe of our
-consumers. Though, it still leaves registry administrators in a poisition of, "press this button in time or else there is an
+consumers. Though, it still leaves registry administrators in a position of, "press this button in time or else there is an
 incident", which is still a psychologically stressful operator role.
 
 For operator responses, crates.io and other registries have three lifecycle states:
