@@ -8,8 +8,8 @@
 | Zulip channel        | N/A                                |
 | [crates-io] champion | @Turbo87                           |
 | [cargo] champion     | @eh2406                            |
-| [infra] champion     | ??                                 |
-| [docs-rs] champion   | ??                                 |
+| [docs-rs] champion   | @syphar                            |
+| [infra] champion     | @ubiratansoares                    |
 
 ## Summary
 
