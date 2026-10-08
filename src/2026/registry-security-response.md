@@ -136,7 +136,7 @@ of life improvement for incident responders via bulk actions.
 For publish-time detections and automated holds, there is a potential for maintainer impact. The RFC will go more in 
 depth around the risks and controls for this. In general, the guiding principle will be, run in shadow mode for a 
 while, make sure we have acceptable false-positive rates, focus on serious signals that are obviously suspicious, and 
-only then promote a detection to acting. This protects  both maintainers from toil, and the crates.io and security 
+only then promote a detection to acting. This protects both maintainers from toil, and the crates.io and security 
 teams reviewing the queue from overload. Similarly we will need to specify a SLA, an appeal mechanism, and other nuts 
 and bolts.
 
