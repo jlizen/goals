@@ -63,7 +63,7 @@ For operator responses, crates.io and other registries have three lifecycle stat
 but Cargo and some build tools will avoid resolving yanked cordinates. Reversible.)
 - deleted (Bytes inaccessible, redacted from registry index, admin notifications are manual. Semi-reversible but partially destructive.)
 
-A gap in our existing mitigation (deletion) is that malicious bytes persisent in local Cargo caches after install.
+A gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
 This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring] work will address this gap without action by this goal, because it includes cheap verification of freshness of
 index data (via merkle subtree anlysis).
 
