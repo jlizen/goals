@@ -153,11 +153,6 @@ Expected to run roughly January - March 2027. Design/discussions will start in p
 
 ## Team asks
 
-@jlizen plans to do most of the implementation work for this across all relevant systems, possibly delegating some to
-contractors or Rust Foundation teammates. The team asks are for feedback on approach and reviews.
-
-We expect to have funding to support reviews.
-
 | Team        | Support level | Notes |
 |-------------|---------------|-------|
 | [crates-io] | Large | Review RFC on registry spec support for quarantine; review PRs on manual admin APIs, byte management, authorization; review offline testing design and related PRs; give input on detection systems; give input on policy/governance/operations for automated quarantine; review RFC on automated quarantine on crates.io + related implementation |
