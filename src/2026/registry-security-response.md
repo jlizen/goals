@@ -157,10 +157,12 @@ We expect to have funding to support reviews.
 
 | Team        | Support level | Notes |
 |-------------|---------------|-------|
-| [crates-io] | Large | Co-review and approve RFC 1 (Cargo/registry support for quarantine); review and approve PR issue on manual admin APIs, byte management, authorization; review and approve RFC 2 (unreleased state); review and approve RFC 3 (publish-time detection systems); review implementation of RFC 3 |
-| [cargo]     | Medium | Review and approve RFC 1 (Cargo/registry support for quarantine); review implementation of RFC 1; Review and approve RFC 2 (Unreleased state + Cargo publish support); review implementation of RFC 2 |
-| [docs-rs]   | Small | Review and approve RFC 1 and RFC 2 with regard to changes to docs.rs build conditions and release state tracking; review the implementation of RFC 1 and 2|
-| [infra]     | Small | Advisory consult on crates.io implementation of quarantine APIs and RFC 3 (publish-time scans) |
+| [crates-io] | Large | Review RFC on registry spec support for quarantine; review PRs on manual admin APIs, byte management, authorization; review offline testing design and related PRs; give input on detection systems; give input on policy/governance/operations for automated quarantine; review RFC on automated quarantine on crates.io + related implementation |
+| [cargo]     | Medium | Review RFC on cargo/index support for quarantine + related implementation; review RFC on auto-quarantine + handling for quarantined publishes, related implementation |
+| [docs-rs]   | Small | Review + approve changes to docs.rs to avoid building quarantined crates + display badges |
+| [infra]     | Small | Advisory consult on crates.io implementation of quarantine and automated detection systems |
+| [social-media]     | Small | Advice + edits for blog posts |
+
 
 Beyond Rust Project teams, we will also want to consult with the Rust Foundation, particularly its security team. We
 also will want to consult with outside build tools (Bazel, Buck2, Yocto). Our designs should maintain security boundaries
