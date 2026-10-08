@@ -59,7 +59,7 @@ incident", which is still a psychologically stressful operator role.
 
 For operator responses, crates.io and other registries have three lifecycle states:
 - public and available
-- public but "yanked" (Flagged as yanked in the index, but still distributed and live on the crates.io CDN. Installable,
+- public but "yanked" (Flagged as yanked in the index, but still distributed and live on the crates.io CDN. Downloadable via standard endpoints,
 but Cargo and some build tools will avoid resolving yanked cordinates. Reversible.)
 - deleted (Bytes inaccessible, redacted from registry index, admin notifications are manual. Semi-reversible but partially destructive.)
 
