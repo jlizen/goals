@@ -36,7 +36,7 @@ This goal builds some of those tools, in three phases:
 
 #### The big picture
 
-Most language ecosystems have recently experienced supply chain attacks that compromised significat infrastructure.
+Most language ecosystems have recently experienced supply chain attacks that compromised significant infrastructure.
 Attacks are evolving in sophistication to include two stage attack payloads, hiding primary attacks underneath
 poisoned dependencies, and manipulation of the resolver to increase delivery ([arrayref August 2026](https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/)).
 We also see new attacks such as targeting high-impact individuals [via spearphishing](https://blog.rust-lang.org/2026/09/17/targeted-attacks/).
