@@ -50,7 +50,7 @@ spread via compromised environments).
 
 We have quite a few detection systems built already, running offline. In fact, for the `arrayref` incident, several Rust 
 Foundation security systems did in fact trigger (for instance, the namesquatting detection). They largely operate based
-on scheduled jobs. Some fire notifications, but many false-positive-prone and reviewed manually.
+on scheduled jobs. Some fire notifications, but many are false-positive-prone, so they must be reviewed manually.
 
 We are also building client-side hardening via `min-publish-age`. It adds Cargo-side cooldowns for extra scrutiny.
 This could become set by default and relieve some of the urgency of security responses, at least for some swathe of our
