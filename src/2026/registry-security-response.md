@@ -159,7 +159,7 @@ new detections, but with publicly agreed-upon criteria for such decisions that i
 We'd prefer each individual RFC to be relatively small to keep it manageable to review and find consensus. Specifically,
 we are designing the quarantine registry spec and Cargo behaviors (RFC 1), separately from the actual distributed systems work that crates.io will implement on top of it (crates.io issue/PR).
 
-And then, we are separating the Cargo/registry spec baseline support for publish-time holds (RFC 3) separately for
+And then, we are separating the Cargo/registry spec baseline support for publish-time holds (RFC 3) from
 the policies around detections that actually apply such holds (RFC 4), and the crates.io-side implementation of those
 policies.
 
