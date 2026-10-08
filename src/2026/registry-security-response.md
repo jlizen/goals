@@ -175,6 +175,10 @@ for instance via cargo-vet. But, that deserves its own discussion and Project Go
 
 ## Funding
 
+Funding will go to team reviewers and champions. Excess funds
+will be contributed to the Rust Foundation Maintainer Fund to
+support ongoing maintenance of related features.
+
 | Purpose | Cost | Funded | Sponsor(s) |
 |---------|------|--------|------------|
 | Reviews + design support + champion cycles | $10,000 | No | |
