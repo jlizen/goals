@@ -82,19 +82,20 @@ Maven Central has similar systems downstream of the registry via a paid product,
 
 ### What we propose to do about it
 
-We expect three phases of work. Each will have one or more design discussions via RFC or team repo, followed by implementation.
+We expect three phases of work, spanning roughly 4 months. Each will have one or more design discussions via RFC or team repo,
+followed by implementation. Date estimates are rough and will be updated as needed.
 
-Support for manual quarantines:
+Support for manual quarantines (October-November 2026):
  - [RFC 1](https://github.com/jlizen/rfcs/pull/1): A registry quarantined/withdrawn state, matching Cargo behavior
  - Crates.io issue/PR: crates.io support for quarantines and withdrawals
 
-Detection system experiments:
+Detection system experiments (December 2026-Jan 2027):
 - Run existing detection systems against the crates.io event feed
 - Build a couple new detection systems aimed at very-high-confidence checks that usually require human review
 - Analyze the results of these experiments, including if they flagged on future supply chain attacks, as well as on
 syntheic attack traffic, and prepare recommendations
 
-Publish-time mitigation systems:
+Publish-time mitigation systems (December 2026-Feburary 2027):
 - RFC 2: A registry unreleased state, matching Cargo behavior. This includes support publishing against unreleased crates
 to avoid breaking release train workflows.
 - RFC 3: crates.io policies and practices to enable mitigation, related governance
