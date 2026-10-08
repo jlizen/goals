@@ -184,6 +184,7 @@ in source, and more.
 Glad to collaborate with others on this stage in particular (though probably other parts too). This would
 be a good opportunity for any of:
 - data scientist
+- applied scientist
 - distributed systems engineer
 - security engineer
 
