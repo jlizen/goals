@@ -96,6 +96,9 @@ This goal these capabilities in three phases:
 
 We expect three phases of work, spanning 4-6 months.
 
+I (@jlizen) am open to collaborating with others on subtasks - the second phase, offline testing, in particular would benefit from more
+hands coming up with detection algorithms. For now, I am listing myself for all tasks as I will anchor them in absence of other participants.
+
 | Task                                                         | Owner(s) | Notes |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
 | manual quarantine support for crates.io and Cargo            | @jlizen  | ------------------------------------------------------------ |
@@ -163,10 +166,26 @@ We expect to have funding to support reviews.
 | [infra]     | Small | Advisory consult on crates.io implementation of quarantine and automated detection systems |
 | [social-media]     | Small | Advice + edits for blog posts |
 
-
 Beyond Rust Project teams, we will also want to consult with the Rust Foundation, particularly its security team. We
 also will want to consult with outside build tools (Bazel, Buck2, Yocto). Our designs should maintain security boundaries
 without external build tool changes, but they could make UX improvements if they were aware of our new index states.
+
+## Help wanted
+
+| Task | Experience level | Time investment |
+|------|-----------------|-----------------|
+| Add new detection systems | Flexible | 2 weeks - 2 months |
+
+During phase two, offline testing for supply chain attack detection systems, we will be wiring up a stub
+and then a small assortment of further detections. There is an opportunity to dry run many more approaches
+for detection while we are at it. For instance, social dependency graph analysis, scanning for certain patterns
+in source, and more.
+
+Glad to collaborate with others on this stage in particular (though probably other parts too). This would
+be a good opportunity for any of:
+- data scientist
+- distributed systems engineer
+- security engineer
 
 
 ## Frequently asked questions
