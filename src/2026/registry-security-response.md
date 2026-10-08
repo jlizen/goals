@@ -13,28 +13,22 @@
 
 ## Summary
 
-Registry administrators see supply chain attacks increasing in both in volume and sophistication.
-We need to make sure we have the right security primitives to respond to new threats,
-and that we have the confidence to use them when uncertain. We also need to raise the floor
-of our front-line defenses so that our operators can focus on the most subtle attacks.
+We plan to speed up manual security responses in the crates.io ecosystem by adding support for
+temporarily quaranting distribution of specific crate versions. Then, we will relieve pressure
+on our crates.io and security operators by building automated detection systems that freeze
+extremely suspicious crates for human evaluation.
 
+## Motivation
+
+### The status quo
+
+Registry administrators see supply chain attacks increasing in both in volume and sophistication. 
 Today, we have a tight crates.io security response team, that reacts quickly, but our
 mitigations are mostly manual and frequently destructive to the point of delaying response.
 From recent attacks, we see tools that are missing from our toolkit which we want for the future.
 
 An illustrative example: 
 > In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
-
-This goal builds some of those tools, in three phases:
-1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
-2. Gather shadow-mode data on supply chain detection systems to validate strategies
-3. Build systems that detect likely attacks prior to publish and freeze them for human reviews
-
-## Motivation
-
-### The status quo
-
-#### The big picture
 
 Most language ecosystems have recently experienced supply chain attacks that compromised significant infrastructure.
 Attacks are evolving in sophistication to include two stage attack payloads, hiding primary attacks underneath
@@ -79,28 +73,80 @@ impact via its current implementation.
 
 Maven Central has similar systems downstream of the registry via a paid product, [Firewall](https://help.sonatype.com/en/firewall-quarantine.html).
 
+## What we propose to do about it
 
-### What we propose to do about it
+We need to make sure that crates.io operators have the right security primitives to respond to new threats,
+and that we have the confidence to use them when uncertain. We also need to raise the floor
+of our front-line defenses so that our operators can focus on the most subtle attacks.
 
-We expect three phases of work, spanning roughly 4 months. Each will have one or more design discussions via RFC or team repo,
-followed by implementation. Date estimates are rough and will be updated as needed.
+To accomplish this, we should add new administrator actions that are strong enough to prevent
+use of malicious software, but non-disruptive to users, auditable, and reversible.
 
-Support for manual quarantines (October-November 2026):
- - [RFC 1](https://github.com/jlizen/rfcs/pull/1): A registry quarantined/withdrawn state, matching Cargo behavior
- - Crates.io issue/PR: crates.io support for quarantines and withdrawals
+We also need ways to apply automation to flag clearly suspicious uploads. Our
+crates.io and security operators should be able to review flagged activities in
+low-pressure ways rather then spending manual cycles closely tracking malicious activity.
 
-Detection system experiments (December 2026-Jan 2027):
-- Run existing detection systems against the crates.io event feed
-- Build a couple new detection systems aimed at very-high-confidence checks that usually require human review
-- Analyze the results of these experiments, including if they flagged on future supply chain attacks, as well as on
-syntheic attack traffic, and prepare recommendations
+This goal these capabilities in three phases:
+1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
+2. Dry run the crates.io event feed against supply chain attack detection strategies to validate approach
+3. Build systems that detect likely attacks prior to publish and freeze them for human reviews
 
-Publish-time mitigation systems (December 2026-Feburary 2027):
-- RFC 2: A registry unreleased state, matching Cargo behavior. This includes support publishing against unreleased crates
-to avoid breaking release train workflows.
-- RFC 3: crates.io policies and practices to enable mitigation, related governance
-- Crates.io issue/PR: crates.io support for publish-time scan and hold, manual review queue
+### Work items over the next year
 
+
+We expect three phases of work, spanning 4-6 months.
+
+| Task                                                         | Owner(s) | Notes |
+| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
+| manual quarantine support for crates.io and Cargo            | @jlizen  | ------------------------------------------------------------ |
+| offline testing for supply chain attack detection systems    | @jlizen  | building on systems created by @LawnGnome and @walterhpearce |
+| publish-time enforcement and related governance              | @jlizen  | ------------------------------------------------------------ |
+
+#### Manual quarantine support crates.io and Cargo
+
+Expected to run roughly October 2026 - November 2026.
+
+| Task                                                                      | Owner(s) | Notes                                                        |
+| ------------------------------------------------------------------------  | -------- | ---------------------------------------------------------    |
+| RFC to add withheld/quarantined state, Cargo support                      | @jlizen  | https://github.com/rust-lang/rfcs/pull/4016                  |
+| Cargo implementation of the RFC                                           | @jlizen  |                                                              |
+| Withheld/quarantine support in docs.rs, crates-index-diff, related tools  | @jlizen  | backend + frontend for docs.rs                               |
+| crates.io backend support for withheld/quarantined state                  | @jlizen  | database + CDN side                                          |
+| crates.io admin API support for withheld/quarantined state                | @jlizen  | crates.io API service. includes bulk/user-scope operations   |
+| crates.io frontend support for withheld/quarantined state                 | @jlizen  | quarantine reasons + warnings                                |
+| User-facing crates.io policy documentation for withheld/quarantined state | @jlizen  | updates to https://crates.io/policies                        |
+| Blog announcement of new quarantine supprt/policies                       | @jlizen  |                                                              |
+
+
+#### Offline testing for supply chain attack detection systems
+
+Expected to run roughly December 2026 - February 2027, though testing and data analysis will be ongoing.
+
+| Task                                                                                       | Owner(s) | Notes                                                   |
+| -----------------------------------------------------------------------------------------  | -------- | ------------------------------------------------------- |
+| Write a design on "shadow mode" testing system                         | @jlizen  | Shadow mode = dry run the crates.io event feed through detection algorithms,
+design will include signs of success and ways of sending synthetic attack traffic |
+| Implement testing systems                                                                  | @jlizen  | stub out a detection system                             |
+| Wire up existing detection systems against testing system                                  | @jlizen  |                                                         |
+| Select and build 1-3 additional experimental detection systems                             | @jlizen  |                                                         |
+| Operate systems for at least one month and gather data                                     | @jlizen  |                                                         |
+| Write up technical analysis of data that includes recommendations which systems to enable  | @jlizen  |                                                         |
+| Semi-technical blog post discussing high level findings                                    | @jlizen  |                                                         | 
+
+#### Publish-time enforcement and related governance
+
+Expected to run roughly January - March 2027. Design/discussions will start in parallel to offline testing (preceding subgoal).
+
+| Task                                                                                       | Owner(s) | Notes                                                    |
+| -----------------------------------------------------------------------------------------  | -------- | -------------------------------------------------------- |
+| Rough draft of policies practices around automatic quarantine            | @jlizen  | Focused on publish-time, but could include post-publish automation as well |
+| Cargo/registry spec RFC on unreleased state       | @jlizen  | Addresses use cases like publishing release trains against unreleased crates and forensic builds  |
+| Async and/or sync discussion with interested community         | @jlizen  |  Build consensus around policy and practice for automated enforcement strategies     |
+| RFC on automated crates.io quarantine / manual review systems                              | @jlizen  |  Both system and policy/governance design                |
+| Implement crates.io platform support for running pre-publish detections                    | @jlizen  |                                                          |
+| Wire up initial detection systems                                                          | @jlizen  |                                                          |
+| Semi-technical blog post announcing new capabilities and discussing system design          | @jlizen  |                                                          |
+| Blog case study on 1-3 successful mitigations                                              | @jlizen  |                                                         | 
 
 ## Team asks
 
@@ -109,12 +155,12 @@ contractors or Rust Foundation teammates. The team asks are for feedback on appr
 
 We expect to have funding to support reviews.
 
-| Team | Support level | Notes |
-|------|---------------|-------|
-| [cargo] | Medium | Review and approve RFC 1 (Cargo/registry support for quarantine); review implementation of RFC 1; Review and approve RFC 2 (Unreleased state + Cargo publish support); review implementation of RFC 2 |
-| [crates-io] | Medium | Co-review and approve RFC 1 (Cargo/registry support for quarantine); review and approve PR issue on manual admin APIs, byte management, authorization; review and approve RFC 2 (unreleased state); review and approve RFC 3 (publish-time detection systems); review implementation of RFC 3 |
-| [docs-rs] | Small | Review and approve RFC 1 and RFC 2 with regard to changes to docs.rs build conditions and release state tracking; review the implementation of RFC 1 and 2|
-| [infra] | Small | Advisory consult on crates.io implementation of quarantine APIs and RFC 3 (publish-time scans) |
+| Team        | Support level | Notes |
+|-------------|---------------|-------|
+| [crates-io] | Large | Co-review and approve RFC 1 (Cargo/registry support for quarantine); review and approve PR issue on manual admin APIs, byte management, authorization; review and approve RFC 2 (unreleased state); review and approve RFC 3 (publish-time detection systems); review implementation of RFC 3 |
+| [cargo]     | Medium | Review and approve RFC 1 (Cargo/registry support for quarantine); review implementation of RFC 1; Review and approve RFC 2 (Unreleased state + Cargo publish support); review implementation of RFC 2 |
+| [docs-rs]   | Small | Review and approve RFC 1 and RFC 2 with regard to changes to docs.rs build conditions and release state tracking; review the implementation of RFC 1 and 2|
+| [infra]     | Small | Advisory consult on crates.io implementation of quarantine APIs and RFC 3 (publish-time scans) |
 
 Beyond Rust Project teams, we will also want to consult with the Rust Foundation, particularly its security team. We
 also will want to consult with outside build tools (Bazel, Buck2, Yocto). Our designs should maintain security boundaries
