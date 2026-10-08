@@ -1,4 +1,4 @@
-# Registry security response: hold, withdraw, publish-time checks
+# crates.io hardening against supply chain attacks
 
 
 | Metadata             |                                    |
@@ -15,8 +15,8 @@
 
 We plan to speed up manual security responses in the crates.io ecosystem by adding support for
 temporarily quaranting distribution of specific crate versions. Then, we will relieve pressure
-on our crates.io and security operators by building automated detection systems that freeze
-extremely suspicious crates for human evaluation.
+on our crates.io and security operators and improve our time to respond by building automated detection
+systems that freeze extremely suspicious crates for human evaluation.
 
 ## Motivation
 
