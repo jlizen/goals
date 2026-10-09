@@ -55,7 +55,7 @@ Crates.io and other registries have three package lifecycle states: published, y
 
 Deletion is only partially reversible for two reasons: it loses download stats and history, which significantly impacts the
 perceived legitimacy of the project, and it frees the crate name for alternative ownership after an initial 24 hour period.
-Restoring deletes only means restoring registries versions in the index and making crate bytes accessible.
+Restoring deletes only means restoring crate versions in the index and making crate bytes accessible.
 
 Another gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
 This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring work](https://goals.rust-lang.org/2026/mirroring.html) will address this gap without action by this goal, because it includes cheap verification of freshness of
