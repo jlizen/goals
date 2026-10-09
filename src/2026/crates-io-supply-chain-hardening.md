@@ -86,7 +86,7 @@ We also need ways to automatically flag clearly suspicious uploads. Our
 crates.io and security operators should be able to review flagged activities in
 low-pressure ways rather then spending manual cycles closely tracking malicious activity.
 
-This goal these capabilities in three phases:
+This goal adds these capabilities in three phases:
 1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
 2. Dry run the crates.io event feed against supply chain attack detection strategies to validate approach
 3. Build systems that detect likely attacks prior to publish and freeze them for human reviews
