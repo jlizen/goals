@@ -85,21 +85,14 @@ Maven Central has similar systems downstream of the registry via a paid product,
 
 ## What we propose to do about it
 
-We need to make sure that crates.io operators have the right security primitives to respond to new threats,
-and that we have the confidence to use them when uncertain. We also need to raise the floor
-of our front-line defenses so that our operators can focus on the most subtle attacks.
+We propose adding an intermediate "quarantined" state that bridges the gap between yank and deletion, and a "withdrawn"
+state that is a fully, reversible auditable delete. This prevents access of crate bytes and avoids resolving withheld
+versions, but does not wipe ownership identity and usage data.
 
-To accomplish this, we should add new administrator actions that are strong enough to prevent
-use of malicious software, but non-disruptive to users, auditable, and reversible.
-
-We also need ways to automatically flag clearly suspicious uploads. Our
-crates.io and security operators should be able to review flagged activities in
-low-pressure ways rather then spending manual cycles closely tracking malicious activity.
-
-This goal adds these capabilities in three phases:
-1. Add registry support for "freezing" extremely suspicious packages for manual investigation, and holding their bytes
-2. Dry run the crates.io event feed against supply chain attack detection strategies to validate approach
-3. Build systems that detect likely attacks prior to publish and freeze them for human reviews
+We also need ways to automatically flag clearly suspicious uploads. We will move our highest confidence detection
+systems from being passive to active, automatically quarantining extremely suspicious releases for human review. As
+part of this, we will validate our detections against real-world crates.io events to evaluate false positives and efficacy,
+and we will test new detection systems that appear promising.
 
 ### Work items over the next year
 
