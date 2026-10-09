@@ -51,11 +51,24 @@ This could become set by default and relieve some of the urgency of security res
 consumers. Though, it still leaves registry administrators in a position of, "press this button in time or else there is an
 incident", which is still a psychologically stressful operator role.
 
-Crates.io and other registries have three package lifecycle states: published, yanked, and deleted. Yanking a package marks it as undesirable while keeping it accessible, and individual tools may prevent users from downloading it (e.g., cargo avoids resolving yanked versions, but still allows downloading them if they appear in an existing Cargo.lock file). This means yanking is a reversible operation, albeit less safe. In contrast, deleting a package makes it inaccessible by redacting it from the registry index, which makes it safer but destructive. TODO: Why semi, to what extent can it be reversed? What are the costs/pains of the current lifecycle system?
+Crates.io and other registries have three package lifecycle states: published, yanked, and deleted. Yanking a package marks it as undesirable while keeping it accessible, and individual tools may prevent users from downloading it (e.g., cargo avoids resolving yanked versions, but still allows downloading them if they appear in an existing Cargo.lock file). This means yanking is a reversible operation, albeit less safe. In contrast, deleting a package makes it inaccessible by redacting it from the registry index, which makes it safer but destructive.
 
-A gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
+Deletion is only partially reversible for two reasons: it loses download stats and history, which significantly impacts the
+perceived legitimacy of the project, and it frees the crate name for alternative ownership after an initial 24 hour period.
+
+Another gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
 This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring work](https://goals.rust-lang.org/2026/mirroring.html) will address this gap without action by this goal, because it includes cheap verification of freshness of
 index data (via merkle subtree anlysis).
+
+Lastly, deletion has a poor auditabilty story. Deletions show up in a registry's git index as removals of version lines,
+but this record gets buried on index squash. crates.io admins currently manually add notifications to a Zulip channel, but this
+ is not all that discoverable for consumers outside of the Rust Projects.
+
+Stepping back, our current workflows are insufficient for operators because the more impactful mitigation (deletion) forces 
+operators into a destructive action under time pressure. This is stressful and delays response. It also currently requires 
+chaining many individual actions (yanks and deletes of specific versions) into a bulk operation, which is error prone and can
+partially fail. In practice, operators end up making direct database queries rather than scripting via admin APIs, which is
+also a risky move under pressure due to potentially large blast radius.
 
 #### Peer approaches
 
@@ -113,7 +126,8 @@ Expected to run roughly October 2026 - November 2026.
 | Cargo implementation of the RFC                                           | @jlizen  |                                                              |
 | Withheld/quarantine support in docs.rs, crates-index-diff, related tools  | @jlizen  | backend + frontend for docs.rs                               |
 | crates.io backend support for withheld/quarantined state                  | @jlizen  | database + CDN side                                          |
-| crates.io admin API support for withheld/quarantined state                | @jlizen  | crates.io API service. includes bulk/user-scope operations   |
+| crates.io admin API support for withheld/quarantined state                | @jlizen  | crates.io API service   |
+| bulk operations on crates.io admin APIs                                   | @jlizen  | atomic actions with crate-wide scope and owner-wide scope   |
 | crates.io frontend support for withheld/quarantined state                 | @jlizen  | quarantine reasons + warnings                                |
 | User-facing crates.io policy documentation for withheld/quarantined state | @jlizen  | updates to https://crates.io/policies                        |
 | Blog announcement of new quarantine supprt/policies                       | @jlizen  |                                                              |
