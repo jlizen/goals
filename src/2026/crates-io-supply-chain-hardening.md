@@ -82,7 +82,7 @@ of our front-line defenses so that our operators can focus on the most subtle at
 To accomplish this, we should add new administrator actions that are strong enough to prevent
 use of malicious software, but non-disruptive to users, auditable, and reversible.
 
-We also need ways to apply automation to flag clearly suspicious uploads. Our
+We also need ways to automatically flag clearly suspicious uploads. Our
 crates.io and security operators should be able to review flagged activities in
 low-pressure ways rather then spending manual cycles closely tracking malicious activity.
 
