@@ -23,7 +23,7 @@ systems that freeze extremely suspicious crates for human evaluation.
 ### The status quo
 
 Registry administrators see supply chain attacks increasing in both in volume and sophistication. 
-Today, we have a tight crates.io security response team, that reacts quickly, but our
+Today, we have a tight crates.io security response team that reacts quickly, but our
 mitigations are mostly manual and frequently destructive to the point of delaying response.
 From recent attacks, we see tools that are missing from our toolkit which we want for the future.
 
