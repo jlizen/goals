@@ -129,8 +129,7 @@ Expected to run roughly December 2026 - February 2027, though testing and data a
 
 | Task                                                                                       | Owner(s) | Notes                                                   |
 | -----------------------------------------------------------------------------------------  | -------- | ------------------------------------------------------- |
-| Write a design on "shadow mode" testing system                         | @jlizen  | Shadow mode = dry run the crates.io event feed through detection algorithms,
-design will include signs of success and ways of sending synthetic attack traffic |
+| Write a design on "shadow mode" testing system                         | @jlizen  | Shadow mode = dry run the crates.io event feed through detection algorithms. Design will include signs of success and ways of sending synthetic attack traffic |
 | Implement testing systems                                                                  | @jlizen  | stub out a detection system                             |
 | Wire up existing detection systems against testing system                     | @jlizen  | Supported by @walterhpearce and @LawnGnome, they might do some       |
 | Select and build 1-3 additional experimental detection systems                           | Supported by @walterhpearce and @LawnGnome, they might do some       |
