@@ -57,7 +57,7 @@ Deletion is only partially reversible for two reasons: it loses download stats a
 perceived legitimacy of the project, and it frees the crate name for alternative ownership after an initial 24 hour period.
 Restoring deletes only means restoring crate versions in the index and making crate bytes accessible.
 
-Further, deletion has a poor auditabilty story. Deletions show up in a registry's git index as removals of version lines,
+Furthermore, deletion has a poor auditability story. Deletions show up in a registry's git index as removals of version lines,
 but this record gets buried on index squash. crates.io admins currently manually add notifications to a Zulip channel, but this
  is not all that discoverable for consumers outside of the Rust Project.
 
