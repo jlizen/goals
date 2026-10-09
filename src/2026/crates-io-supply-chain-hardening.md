@@ -51,11 +51,7 @@ This could become set by default and relieve some of the urgency of security res
 consumers. Though, it still leaves registry administrators in a position of, "press this button in time or else there is an
 incident", which is still a psychologically stressful operator role.
 
-For operator responses, crates.io and other registries have three lifecycle states:
-- public and available
-- public but "yanked" (Flagged as yanked in the index, but still distributed and live on the crates.io CDN. Downloadable via standard endpoints,
-but Cargo and some build tools will avoid resolving yanked cordinates. Reversible.)
-- deleted (Bytes inaccessible, redacted from registry index, admin notifications are manual. Semi-reversible but partially destructive.)
+Crates.io and other registries have three package lifecycle states: published, yanked, and deleted. Yanking a package marks it as undesirable while keeping it accessible, and individual tools may prevent users from downloading it (e.g., cargo avoids resolving yanked versions, but still allows downloading them if they appear in an existing Cargo.lock file). This means yanking is a reversible operation, albeit less safe. In contrast, deleting a package makes it inaccessible by redacting it from the registry index, which makes it safer but destructive. TODO: Why semi, to what extent can it be reversed? What are the costs/pains of the current lifecycle system?
 
 A gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
 This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring work](https://goals.rust-lang.org/2026/mirroring.html) will address this gap without action by this goal, because it includes cheap verification of freshness of
@@ -151,7 +147,6 @@ Expected to run roughly January - March 2027. Design/discussions will start in p
 | Implement crates.io platform support for running pre-publish detections                    | @jlizen  |                                                          |
 | Wire up initial detection systems                                                          | 
 @jlizen  |                                                          |
-         |                                                          |
 | Semi-technical blog post announcing new capabilities and discussing system design          | @jlizen  |                                                          |
 | Blog case study on 1-3 successful mitigations                                              | @jlizen  |                                                         | 
 
