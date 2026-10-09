@@ -223,7 +223,7 @@ new detections, but with publicly agreed-upon criteria for such decisions that i
 We'd prefer each individual RFC to be relatively small to keep it manageable to review and find consensus. Specifically,
 we are designing the quarantine registry spec and Cargo behaviors, separately from the actual distributed systems work that crates.io will implement on top of it (crates.io issue/PR).
 
-We build offline testing systems early so we can start baking detection approaches against dryrun data, since we will
+We build offline testing systems early so we can start baking detection approaches against dry-run data, since we will
 need strong data to bring to the ultimate RFCs to argue for enabling our first couple detection systems.
 
 And then, we are separating the Cargo/registry spec baseline support for publish-time holds from
