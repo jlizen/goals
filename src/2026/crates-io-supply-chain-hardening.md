@@ -82,7 +82,7 @@ Maven Central has similar systems downstream of the registry via a paid product,
 ## What we propose to do about it
 
 We propose adding an intermediate "quarantined" state that bridges the gap between yank and deletion, and a "withdrawn"
-state that is a fully, reversible auditable delete. This prevents access of crate bytes and avoids resolving withheld
+state that is a fully reversible, auditable delete. This prevents access of crate bytes and avoids resolving withheld
 versions, but does not wipe ownership identity and usage data. This is preferable to the "yanked" state because it prevents
 usage in new builds even if a version appears in an existing Cargo.lock. It is preferable to deletion because it can be used
 used with less friction but similar efficacy due to reversibility.
