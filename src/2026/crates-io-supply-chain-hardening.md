@@ -133,6 +133,7 @@ Expected to run roughly December 2026 - February 2027, though testing and data a
 | Implement testing systems                                                                  | @jlizen  | stub out a detection system                             |
 | Wire up existing detection systems against testing system                     | @jlizen  | Supported by @walterhpearce and @LawnGnome, they might do some       |
 | Select and build 1-3 additional experimental detection systems                           | Supported by @walterhpearce and @LawnGnome, they might do some       |
+| Research and implement further detection systems                 |                         |
 | Operate systems for at least one month and gather data                                     | @jlizen  |                                                         |
 | Write up technical analysis of data that includes recommendations which systems to enable  | @jlizen  |                                                         |
 | Semi-technical blog post discussing high level findings                                    | @jlizen  |                                                         | 
@@ -148,7 +149,9 @@ Expected to run roughly January - March 2027. Design/discussions will start in p
 | Async and/or sync discussion with interested community         | @jlizen  |  Build consensus around policy and practice for automated enforcement strategies     |
 | RFC on automated crates.io quarantine / manual review systems                              | @jlizen  |  Both system and policy/governance design                |
 | Implement crates.io platform support for running pre-publish detections                    | @jlizen  |                                                          |
-| Wire up initial detection systems                                                          | @jlizen  |                                                          |
+| Wire up initial detection systems                                                          | 
+@jlizen  |                                                          |
+         |                                                          |
 | Semi-technical blog post announcing new capabilities and discussing system design          | @jlizen  |                                                          |
 | Blog case study on 1-3 successful mitigations                                              | @jlizen  |                                                         | 
 
