@@ -88,9 +88,10 @@ usage in new builds even if a version appears in an existing Cargo.lock. It is p
 used with less friction but similar efficacy due to reversibility.
 
 We also need ways to automatically flag clearly suspicious uploads. We will move our highest confidence detection
-systems from being passive to active, automatically quarantining extremely suspicious releases for human review. As
-part of this, we will validate our detections against real-world crates.io events to evaluate false positives and efficacy,
-and we will test new detection systems that appear promising.
+systems from being passive to active, automatically quarantining extremely suspicious releases for human review. This
+gives our operators the leisure to review flagged crates in depth, on more reasonable timelines, rather than needing
+to make high-pressure decisions as quickly as possible. As part of this, we will validate our detections against real-world
+crates.io events to evaluate false positives and efficacy, and we will test new detection systems that appear promising.
 
 ### Work items over the next year
 
