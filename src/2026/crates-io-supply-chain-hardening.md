@@ -63,7 +63,7 @@ index data (via merkle subtree anlysis).
 
 Lastly, deletion has a poor auditabilty story. Deletions show up in a registry's git index as removals of version lines,
 but this record gets buried on index squash. crates.io admins currently manually add notifications to a Zulip channel, but this
- is not all that discoverable for consumers outside of the Rust Projects.
+ is not all that discoverable for consumers outside of the Rust Project.
 
 Stepping back, our current workflows are insufficient for operators because the more impactful mitigation (deletion) forces 
 operators into a destructive action under time pressure. This is stressful and delays response. It also currently requires 
