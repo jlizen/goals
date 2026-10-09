@@ -27,8 +27,7 @@ Today, we have a tight crates.io security response team that reacts quickly, but
 mitigations are mostly manual and frequently destructive to the point of delaying response.
 From recent attacks, we see tools that are missing from our toolkit which we want for the future.
 
-An illustrative example: 
-> In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
+In a recent security incident, a stolen token published malware across an account of ~250 crates with hundreds of automated versions. The responder had to "wade through LLM spam of hundreds of versions" and chain together a script with ~70 yank & delete commands. In fact, one deletion failed and the related version lasted for a few extra days. According to the operator: "I kinda wish we had an intermediate step here. Deletion is only semi-reversible, but I would like to publicly nuke the account while we investigate."
 
 Most language ecosystems have recently experienced supply chain attacks that compromised significant infrastructure.
 Attacks are evolving in sophistication to include two stage attack payloads, hiding primary attacks underneath
