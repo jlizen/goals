@@ -71,7 +71,7 @@ also a risky move under pressure due to potentially large blast radius.
 
 One thing that we are missing, that our peers in PyPI have built, is [a quarantine state](https://blog.pypi.org/posts/2024-12-30-quarantine/)
 that explicitly *freezes* bytes and stops serving them, even if that specific crate version is in lockfiles. This is the primitive we were missing
-in "The status quo"'s quoted incident.
+in the incident mentioned earlier.
 
 PyPI maintainers are also [discussing automated detection + hold systems](https://github.com/python/peps/pull/5070). 
 [npm has similar systems](https://github.com/orgs/community/discussions/203413), though has faced criticism on maintainer 
