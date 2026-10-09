@@ -13,10 +13,10 @@
 
 ## Summary
 
-We plan to speed up manual security responses in the crates.io ecosystem by adding support for
-temporarily quaranting distribution of specific crate versions. Then, we will relieve pressure
-on our crates.io and security operators and improve our time to respond by building automated detection
-systems that freeze extremely suspicious crates for human evaluation.
+We plan to speed up and improve efficacy of  manual security responses in the crates.io ecosystem by
+adding support for temporarily quarantining distribution of specific crate versions. Then, we will build
+automated detection systems that freeze extremely suspicious crates for human evaluation. This automation will improve
+time to mitigation and also reduce operator load by allowing manual review on less urgent timelines.
 
 ## Motivation
 
