@@ -57,11 +57,7 @@ Deletion is only partially reversible for two reasons: it loses download stats a
 perceived legitimacy of the project, and it frees the crate name for alternative ownership after an initial 24 hour period.
 Restoring deletes only means restoring crate versions in the index and making crate bytes accessible.
 
-Another gap in our existing mitigation (deletion) is that malicious bytes persist in local Cargo caches after install.
-This means that deleted crates are still buildable locally until the cache expires or is revoked. Ongoing [Verifiable Mirroring work](https://goals.rust-lang.org/2026/mirroring.html) will address this gap without action by this goal, because it includes cheap verification of freshness of
-index data (via merkle subtree anlysis).
-
-Lastly, deletion has a poor auditabilty story. Deletions show up in a registry's git index as removals of version lines,
+Further, deletion has a poor auditabilty story. Deletions show up in a registry's git index as removals of version lines,
 but this record gets buried on index squash. crates.io admins currently manually add notifications to a Zulip channel, but this
  is not all that discoverable for consumers outside of the Rust Project.
 
@@ -198,6 +194,15 @@ be a good opportunity for any of:
 Users continuously install software in CI and otherwise. Even if a version has been released, there is benefit in
 holding it to prevent subsequent installs. Lowering the threshold for taking admin action via a softer mitigation will
 allow faster responses. Even better, we're working towards holding software before it is even released in the first place.
+
+### What about malware that is already in local Cargo caches?
+
+Today, yanked and deleted crates persist in local Cargo caches even after registry administators action on them upstream.
+This gap will be closed separately from this goal by ongoing [Verifiable Mirroring work](https://goals.rust-lang.org/2026/mirroring.html). At a high level, the verifiable mirror will have cheap access to a cryptographically verifiable view
+of the freshest form of the upstream registry index, so that it can invalidate caches when a given crate's index file changes.
+
+This will apply out of box to yanks and deletions today. Capabilities added in this goal for new lifecycle states (quarantined
+and withdrawn) will also benefit.
 
 ### Does this add work for maintainers?
 
