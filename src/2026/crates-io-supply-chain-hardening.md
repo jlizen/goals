@@ -64,7 +64,7 @@ index data (via merkle subtree anlysis).
 #### Peer approaches
 
 One thing that we are missing, that our peers in PyPI have built, is [a quarantine state](https://blog.pypi.org/posts/2024-12-30-quarantine/)
-that explicitly *freezes* bytes and stops serving them, even if they are in lockfiles. This is the primitive we were missing
+that explicitly *freezes* bytes and stops serving them, even if that specific crate version is in lockfiles. This is the primitive we were missing
 in the Summary's quoted incident.
 
 PyPI maintainers are also [discussing automated detection + hold systems](https://github.com/python/peps/pull/5070). 
