@@ -102,13 +102,11 @@ We expect three phases of work, spanning 4-6 months.
 I (@jlizen) am open to collaborating with others on subtasks - the second phase, offline testing, in particular would benefit from more
 hands coming up with detection algorithms. For now, I am listing myself for all tasks as I will anchor them in absence of other participants.
 
-| Task                                                         | Owner(s) | Notes |
-| manual quarantine support for crates.io and Cargo            | @jlizen  |  |
-| offline testing for supply chain attack detection systems    | @jlizen  | building on systems created by @LawnGnome and @walterhpearce |
-| publish-time enforcement and related governance              | @jlizen  |  |
-| manual quarantine support for crates.io and Cargo            | @jlizen  | ------------------------------------------------------------ |
-| offline testing for supply chain attack detection systems    | @jlizen  | building on systems created by @LawnGnome and @walterhpearce |
-| publish-time enforcement and related governance              | @jlizen  | ------------------------------------------------------------ |
+| Task                                                     | Owner(s) | Notes                                                     |
+| -------------------------------------------------------- | -------- | --------------------------------------------------------- |
+| manual quarantine support for crates.io and Cargo         | @jlizen  |                                                           |
+| offline testing for supply chain attack detection systems | @jlizen  | building on systems created by @LawnGnome and @walterhpearce |
+| publish-time enforcement and related governance           | @jlizen  |                                                           |
 
 #### Manual quarantine support crates.io and Cargo
 
