@@ -1,15 +1,17 @@
 # crates.io hardening against supply chain attacks
 
 
-| Metadata             |                                    |
-| :--                  | :--                                |
-| Contact              | @jlizen                            |
-| Status               | Proposed                           |
-| Zulip channel        | N/A                                |
-| [crates-io] champion | @Turbo87                           |
-| [cargo] champion     | @eh2406                            |
-| [docs-rs] champion   | @syphar                            |
-| [infra] champion     | @ubiratansoares                    |
+| Metadata                 |                                    |
+| :--                      | :--                                |
+| Contact                  | @jlizen                            |
+| Status                   | Proposed                           |
+| Zulip channel            | N/A                                |
+| [crates-io] champion     | @Turbo87                           |
+| [cargo] champion         | @eh2406                            |
+| [docs-rs] champion       | @syphar                            |
+| [infra] champion         | @ubiratansoares                    |
+| [social-media] champion  | @m-ou-se                           |
+
 
 ## Summary
 
@@ -263,4 +265,3 @@ support ongoing maintenance of related features.
 | Purpose | Cost | Funded | Sponsor(s) |
 |---------|------|--------|------------|
 | Reviewers + champions | $10,000 | No | |
-
