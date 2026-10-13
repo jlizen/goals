@@ -3,7 +3,7 @@
 | Metadata | |
 | :-- | :-- |
 | Contact | @jlizen |
-| Status | Accepted |
+| Status | Proposed |
 | Zulip channel | N/A |
 | [crates-io] champion | @Turbo87 |
 | [cargo] champion | @eh2406 |
