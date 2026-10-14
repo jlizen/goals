@@ -3,13 +3,16 @@
 | Metadata | |
 | :-- | :-- |
 | Contact | @jlizen |
-| Status | Proposed |
-| Zulip channel | N/A |
+| Status | Accepted |
+| Zulip channel | [#goals/crates-io-hardening][zulip]  |
+| Tracking issue   | [rust-lang/goals#816] |
 | [crates-io] champion | @Turbo87 |
 | [cargo] champion | @eh2406 |
 | [docs-rs] champion | @syphar |
 | [infra] champion | @ubiratansoares |
 | [social-media] champion | @m-ou-se |
+
+[zulip]: https://rust-lang.zulipchat.com/#narrow/channel/435869-goals/topic/crates.2Eio.20hardening.20against.20supply.20chain.20.28goals.23816.29/with/631558554
 
 ## Summary
 
@@ -179,4 +182,4 @@ Funding will go to team reviewers and champions. Excess funds will be contribute
 
 | Purpose | Cost | Funded | Sponsor(s) |
 | :-- | :-- | :-- | :-- |
-| Reviewers + champions | $10,000 | Yes | [Devolutions](https://devolutions.net/) |
+| Reviewers + champions | $10,000 | Full | [Devolutions](https://devolutions.net/) |
