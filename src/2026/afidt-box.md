@@ -149,7 +149,7 @@ The duration of the project is 12 months of full-time work (~1,920 hours) split 
 
 | Purpose      | Cost | Funded | Sponsor(s)                     |
 |--------------|------|--------|--------------------------------|
-| Contributors | Ask  | 50%    | [AWS](https://aws.amazon.com/) |
+| Contributors | Ask  | Partial| [AWS](https://aws.amazon.com/) |
 
 ## Frequently asked questions
 
